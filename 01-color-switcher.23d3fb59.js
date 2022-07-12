@@ -1,0 +1,2 @@
+const o=document.querySelector("[data-start]");console.log(o);const t=document.querySelector("[data-stop]");function c(){return`#${Math.floor(16777215*Math.random()).toString(16)}`}console.log(t),console.log(document.body.style.color),document.body.style.color=186,function(){const o=c();console.log(o),document.body.style.color=o}(),console.log(c());
+//# sourceMappingURL=01-color-switcher.23d3fb59.js.map
