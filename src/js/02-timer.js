@@ -42,12 +42,9 @@ const goTimer = () => {
     inputRef.disabled = true;
     let delta;
     
-    intervalId = setInterval(make, 1000)
-}
-function make() {
+    intervalId = setInterval(() => {
         delta = time_deadline - new Date().getTime();
-        if (delta <= 0) {
-            Notify.success('Твій час вийшов! Прощавай, москалику! ХА-ХА-ХА-ХА!');
+        if (delta <= 0) {           
             clearInterval(intervalId);
             return;
         };
@@ -55,7 +52,8 @@ function make() {
         timeToEnd = convertMs(delta);
         // console.log(object);
         updateTextcontent(timeToEnd)
-    }
+    },1000)
+}
 function updateTextcontent(date) {
         counterDays.textContent = addLeadingZero(date.days);
         counterHours.textContent = addLeadingZero(date.hours);
