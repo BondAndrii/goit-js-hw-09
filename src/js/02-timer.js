@@ -43,7 +43,7 @@ const goTimer = () => {
         const delta = time_deadline - new Date().getTime();
         if (delta <= 0) {
             Notify.success('Твій час вийшов! Прощавай, москалику! ХА-ХА-ХА-ХА!');
-            clearInterval(this.intervalId);
+            clearInterval(intervalId);
             return;
         };
         timeToEnd = convertMs(delta);
