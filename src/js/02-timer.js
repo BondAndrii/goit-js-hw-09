@@ -1,3 +1,4 @@
+"use strict"
 import flatpickr from "flatpickr";
 import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix, { Notify } from 'notiflix';
@@ -39,7 +40,7 @@ let timeToEnd = {};
 const goTimer = () => { 
     startBtn.disabled = true;
     inputRef.disabled = true;
-    intervalId = setInterval(() => {
+    const intervalId = setInterval(() => {
         const delta = time_deadline - new Date().getTime();
         if (delta <= 0) {
             Notify.success('Твій час вийшов! Прощавай, москалику! ХА-ХА-ХА-ХА!');
