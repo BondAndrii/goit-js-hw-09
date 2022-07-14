@@ -18,7 +18,7 @@ const counterSeconds = document.querySelector('[data-seconds]');
 // console.log(counterSeconds);
 let time_deadline = null;
 startBtn.disabled = true;
-
+let intervalId;
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -40,19 +40,22 @@ let timeToEnd = {};
 const goTimer = () => { 
     startBtn.disabled = true;
     inputRef.disabled = true;
-    const intervalId = setInterval(() => {
-        const delta = time_deadline - new Date().getTime();
+    let delta;
+    
+    intervalId = setInterval(make, 1000)
+}
+function make() {
+        delta = time_deadline - new Date().getTime();
         if (delta <= 0) {
             Notify.success('Твій час вийшов! Прощавай, москалику! ХА-ХА-ХА-ХА!');
             clearInterval(intervalId);
             return;
         };
+        
         timeToEnd = convertMs(delta);
         // console.log(object);
         updateTextcontent(timeToEnd)
-    },1000)
-}
-
+    }
 function updateTextcontent(date) {
         counterDays.textContent = addLeadingZero(date.days);
         counterHours.textContent = addLeadingZero(date.hours);
