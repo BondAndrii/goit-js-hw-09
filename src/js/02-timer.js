@@ -1,6 +1,6 @@
 import flatpickr from "flatpickr";
 import 'flatpickr/dist/flatpickr.min.css';
-import Notiflix from 'notiflix';
+import Notiflix, { Notify } from 'notiflix';
 const timerRef = document.querySelector(".timer");
 console.log(timerRef);
 const inputRef=document.querySelector('#datetime-picker')
@@ -15,37 +15,76 @@ const counterMinutes = document.querySelector('[data-minutes]');
 console.log(counterMinutes);
 const counterSeconds = document.querySelector('[data-seconds]');
 console.log(counterSeconds);
+const time_deadline = new Date(2022, 6, 14, 17, 16);
 
+startBtn.disabled = true;
 
-
-
-
-
-
-
-
-
-
-
-
-function convertMs(ms) {
+const timer = {
+    intervalId: null,
+    start(rootselector, deadline) {
+        console.log(rootselector, deadline);
+        let now = Date.now();
+        let delta = deadline - now;
+        if (delta <= 0) {
+            Notify.failure('Ти шо Термінатор?! Please choose a date in the future!')
+            console.log(error);
+            return;
+        }
+        this.intervalId = setInterval(() => {
+            now = Date.now();
+            let delta = deadline - now;
+            const data = this.convertMs(delta);            
+            console.log(deadline - Date.now());
+            if (delta <= 0) {
+                Notify.success('Твій час вийшов! Прощавай, москалику! ХА-ХА-ХА-ХА!');
+                clearInterval(this.intervalId);
+                return;
+            } 
+            startBtn.disabled = false;
+            startBtn.addEventListener('click', )
+            this.updateTextcontent(rootselector, data);
+        }, 1000)
+        // console.log(delta);
+    },
+    convertMs(ms) {
   // Number of milliseconds per unit of time
-  const second = 1000;
-  const minute = second * 60;
-  const hour = minute * 60;
-  const day = hour * 24;
+    const second = 1000;
+    const minute = second * 60;
+    const hour = minute * 60;
+    const day = hour * 24;
 
-  // Remaining days
-  const days = Math.floor(ms / day);
-  // Remaining hours
-  const hours = Math.floor((ms % day) / hour);
-  // Remaining minutes
-  const minutes = Math.floor(((ms % day) % hour) / minute);
-  // Remaining seconds
-  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
-
-  return { days, hours, minutes, seconds };
+    // Remaining days
+    const days = Math.floor(ms / day);
+    // Remaining hours
+    const hours = Math.floor((ms % day) / hour);
+    // Remaining minutes
+    const minutes = Math.floor(((ms % day) % hour) / minute);
+    // Remaining seconds
+    const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+            console.log({ days, hours, minutes, seconds });
+    return { days, hours, minutes, seconds };
+    },
+    updateTextcontent(rootselector, { days, hours, minutes, seconds }) {
+        counterDays.textContent = this.addLeadingZero(days);
+        counterHours.textContent = this.addLeadingZero(hours);
+        counterMinutes.textContent = this.addLeadingZero(minutes);
+        counterSeconds.textContent = this.addLeadingZero(seconds);
+    },
+    addLeadingZero(value) {
+        return String(value).padStart(2,0)
+    }
 }
+timer.start(timerRef, time_deadline);
+
+
+
+
+
+
+
+
+
+
 const options = {
   enableTime: true,
   time_24hr: true,
