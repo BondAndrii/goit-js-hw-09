@@ -9,7 +9,7 @@ formRef.addEventListener('submit', event => {
     const firstDelay = +event.target.elements.delay.value;
     const stepDelay = +event.target.step.delay.value;
     const amount = + event.target.amount.dalay.value;
-    let dalay = firstDelay;
+    let delay = firstDelay;
 
     for (let i = 1; i <= amount; i+=1, delay += stepDelay) {
         createPromise(i, delay).then(response => {
