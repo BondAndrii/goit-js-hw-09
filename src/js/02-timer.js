@@ -82,6 +82,7 @@ function convertMs(ms) {
     return { days, hours, minutes, seconds };
     }
 startBtn.addEventListener('click', goTimer);
+// console.log('hello');
 
 
 //     addLeadingZero(value) {
