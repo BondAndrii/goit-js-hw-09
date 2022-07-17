@@ -4,6 +4,7 @@ console.log('hello');
 
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const formRef = document.querySelector('.form');
+console.log(formRef);
 formRef.addEventListener('submit', event => {
     event.preventDefault();
     const firstDelay = +event.target.elements.delay.value;
