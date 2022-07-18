@@ -37,14 +37,16 @@ const options = {
 };
 flatpickr(inputRef, options);
 let timeToEnd = {};
+// let intervalId = null;
 const goTimer = () => { 
     startBtn.disabled = true;
     inputRef.disabled = true;
     let delta;
-    
+    let intervalId = null;
     intervalId = setInterval(() => {
         delta = time_deadline - new Date().getTime();
-        if (delta <= 0) {           
+        if (delta <= 0) { 
+            Notify.failure('пока')
             clearInterval(intervalId);
             return;
         };
