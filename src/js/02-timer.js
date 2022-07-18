@@ -46,7 +46,7 @@ const goTimer = () => {
     intervalId = setInterval(() => {
         delta = time_deadline - new Date().getTime();
         if (delta <= 0) { 
-            Notify.failure('пока')
+            Notify.failure('Твій час вийшов. Здавай домашню роботу, вже як є...')
             clearInterval(intervalId);
             return;
         };
