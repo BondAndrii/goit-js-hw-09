@@ -145,7 +145,7 @@ console.log('hello');
     // }
 
 // timer.start(timerRef, time_deadline);
-
+// коментарій
 
 
 
